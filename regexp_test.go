@@ -27,7 +27,6 @@ func TestStripAll(t *testing.T) {
 		withoutEmojis += ch
 	}
 	stripped := emojiregexp.EmojiRegexp.ReplaceAllString(withEmojis, "")
-	// assert stripped == withoutEmojis
 	if stripped != withoutEmojis {
 		t.Errorf("stripped != withoutEmojis, lengths: %d vs %d", len(stripped), len(withoutEmojis))
 	}
