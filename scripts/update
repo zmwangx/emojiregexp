@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+setopt errexit nounset pipefail
+here=$0:A:h
+root=$here:h
+cd $root
+latest_version=$( curl -sSL 'https://registry.npmjs.org/emoji-test-regex-pattern' | jq -r '."dist-tags".latest')
+tarball="/tmp/emoji-test-regex-pattern-$latest_version.tgz"
+wget -O $tarball "https://registry.npmjs.org/emoji-test-regex-pattern/-/emoji-test-regex-pattern-$latest_version.tgz"
+tar tf $tarball | grep cpp-re2.txt | sort
+tar xf $tarball package/dist/latest/cpp-re2.txt
+cp -f package/dist/latest/cpp-re2.txt re2.txt
+rm -r package
